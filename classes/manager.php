@@ -202,9 +202,14 @@ class manager {
      * @param string $agentdesc       Optional description of the agent.
      * @return bool
      */
-    public static function set_instance_custom(int $blockinstanceid, int $courseid,
-                                               string $apikey, string $agentid,
-                                               string $agentname, string $agentdesc = ''): bool {
+    public static function set_instance_custom(
+        int $blockinstanceid,
+        int $courseid,
+        string $apikey,
+        string $agentid,
+        string $agentname,
+        string $agentdesc = ''
+    ): bool {
         global $DB, $USER;
         $now      = time();
         $existing = $DB->get_record('block_mistralagent_course', ['blockinstanceid' => $blockinstanceid]);
@@ -369,8 +374,13 @@ class manager {
      * @param bool $enabled
      * @return bool
      */
-    public static function update_agent(int $id, string $name, string $mistralagentid,
-                                        string $description, bool $enabled): bool {
+    public static function update_agent(
+        int $id,
+        string $name,
+        string $mistralagentid,
+        string $description,
+        bool $enabled
+    ): bool {
         global $DB;
         $record              = new \stdClass();
         $record->id          = $id;
@@ -410,8 +420,12 @@ class manager {
      * @param int $agentid
      * @return \stdClass
      */
-    public static function get_or_create_conversation(int $userid, int $blockinstanceid,
-                                                       int $courseid, int $agentid): \stdClass {
+    public static function get_or_create_conversation(
+        int $userid,
+        int $blockinstanceid,
+        int $courseid,
+        int $agentid
+    ): \stdClass {
         global $DB;
 
         $conversation = $DB->get_record_sql(
@@ -435,8 +449,13 @@ class manager {
      * @param string $title
      * @return \stdClass
      */
-    public static function create_conversation(int $userid, int $blockinstanceid, int $courseid,
-                                               int $agentid, string $title = ''): \stdClass {
+    public static function create_conversation(
+        int $userid,
+        int $blockinstanceid,
+        int $courseid,
+        int $agentid,
+        string $title = ''
+    ): \stdClass {
         global $DB;
 
         $now                     = time();

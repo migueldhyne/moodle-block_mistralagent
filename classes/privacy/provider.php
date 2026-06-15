@@ -47,8 +47,8 @@ use core_privacy\local\request\writer;
  */
 class provider implements
     \core_privacy\local\metadata\provider,
-    \core_privacy\local\request\plugin\provider,
-    \core_privacy\local\request\core_userlist_provider {
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider {
     // Section separator.
     // Metadata.
     // Section separator.
@@ -275,8 +275,8 @@ class provider implements
             $DB->delete_records('block_mistralagent_msgs', ['conversationid' => $conv->id]);
         }
 
-        $DB->delete_records('block_mistralagent_convs',   ['courseid' => $courseid]);
-        $DB->delete_records('block_mistralagent_quotas',  ['courseid' => $courseid]);
+        $DB->delete_records('block_mistralagent_convs', ['courseid' => $courseid]);
+        $DB->delete_records('block_mistralagent_quotas', ['courseid' => $courseid]);
     }
 
     /**
@@ -307,7 +307,7 @@ class provider implements
                 $DB->delete_records('block_mistralagent_msgs', ['conversationid' => $conv->id]);
             }
 
-            $DB->delete_records('block_mistralagent_convs',  ['userid' => $userid, 'courseid' => $courseid]);
+            $DB->delete_records('block_mistralagent_convs', ['userid' => $userid, 'courseid' => $courseid]);
             $DB->delete_records('block_mistralagent_quotas', ['userid' => $userid, 'courseid' => $courseid]);
         }
     }
