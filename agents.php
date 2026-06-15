@@ -43,9 +43,11 @@ $PAGE->set_heading(get_string('manageagents', 'block_mistralagent'));
 $fetcherror    = '';
 $fetchedagents = [];
 
-if ($action === 'add'
-        && optional_param('fetch_agents', false, PARAM_BOOL)
-        && confirm_sesskey()) {
+if (
+    $action === 'add'
+    && optional_param('fetch_agents', false, PARAM_BOOL)
+    && confirm_sesskey()
+) {
     // PARAM_RAW is required: Mistral API keys contain mixed alphanumeric characters and
     // special chars that would be stripped by PARAM_ALPHANUM or PARAM_TEXT.
     // The value is never output to HTML — it is only transmitted to the Mistral API over HTTPS.
@@ -123,9 +125,11 @@ if ($action === 'add' || $action === 'edit') {
         $adminapikey = get_config('block_mistralagent', 'apikey');
         $hasadminkey = !empty($adminapikey);
 
-        echo html_writer::tag('h5',
+        echo html_writer::tag(
+            'h5',
             '<i class="fa fa-search mr-2"></i>' . get_string('fetch_agents', 'block_mistralagent'),
-            ['class' => 'mb-3']);
+            ['class' => 'mb-3']
+        );
 
         echo '<div class="card mb-4">';
         echo '<div class="card-header"><strong>'
@@ -141,8 +145,14 @@ if ($action === 'add' || $action === 'edit') {
                 . get_string('admin_apikey_configured', 'block_mistralagent')
                 . '</div>';
 
-            echo html_writer::start_tag('form', ['method' => 'post', 'class' => 'form-inline mb-3',
-                'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'add'])]);
+            echo html_writer::start_tag(
+                'form',
+                [
+                    'method' => 'post',
+                    'class' => 'form-inline mb-3',
+                    'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'add']),
+                ]
+            );
             echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
             echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'apikey_input', 'value' => '']);
             echo '<button type="submit" name="fetch_agents" value="1" class="btn btn-primary mr-2">'
@@ -155,13 +165,22 @@ if ($action === 'add' || $action === 'edit') {
         }
 
         // Form to enter a different API key.
-        echo html_writer::start_tag('form', ['method' => 'post', 'class' => 'mform',
-            'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'add'])]);
+        echo html_writer::start_tag(
+            'form',
+            [
+                'method' => 'post',
+                'class' => 'mform',
+                'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'add']),
+            ]
+        );
         echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
 
         echo html_writer::start_div('form-group row');
-        echo html_writer::tag('label', get_string('own_apikey_label', 'block_mistralagent'),
-            ['class' => 'col-sm-3 col-form-label', 'for' => 'apikey-input']);
+        echo html_writer::tag(
+            'label',
+            get_string('own_apikey_label', 'block_mistralagent'),
+            ['class' => 'col-sm-3 col-form-label', 'for' => 'apikey-input']
+        );
         echo html_writer::start_div('col-sm-9');
         echo '<div class="input-group">';
         echo '<input type="password" name="apikey_input" id="apikey-input" class="form-control"'
@@ -202,16 +221,27 @@ if ($action === 'add' || $action === 'edit') {
                 . get_string('agents_found', 'block_mistralagent') . ')</small></div>';
             echo '<div class="card-body">';
 
-            echo html_writer::start_tag('form', ['method' => 'post',
-                'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'save', 'id' => 0]),
-                'class' => 'mform']);
+            echo html_writer::start_tag(
+                'form',
+                [
+                    'method' => 'post',
+                    'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'save', 'id' => 0]),
+                    'class' => 'mform',
+                ]
+            );
             echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
-            echo html_writer::empty_tag('input',
-                ['type' => 'hidden', 'name' => 'name', 'id' => 'hidden-agent-name', 'value' => '']);
-            echo html_writer::empty_tag('input',
-                ['type' => 'hidden', 'name' => 'agent_id', 'id' => 'hidden-agent-id', 'value' => '']);
-            echo html_writer::empty_tag('input',
-                ['type' => 'hidden', 'name' => 'description', 'id' => 'hidden-agent-desc', 'value' => '']);
+            echo html_writer::empty_tag(
+                'input',
+                ['type' => 'hidden', 'name' => 'name', 'id' => 'hidden-agent-name', 'value' => '']
+            );
+            echo html_writer::empty_tag(
+                'input',
+                ['type' => 'hidden', 'name' => 'agent_id', 'id' => 'hidden-agent-id', 'value' => '']
+            );
+            echo html_writer::empty_tag(
+                'input',
+                ['type' => 'hidden', 'name' => 'description', 'id' => 'hidden-agent-desc', 'value' => '']
+            );
             echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'enabled', 'value' => '1']);
 
             echo '<div class="row">';
@@ -246,8 +276,11 @@ if ($action === 'add' || $action === 'edit') {
                 . '<i class="fa fa-save mr-1"></i>'
                 . get_string('savechanges') . '</button>';
             echo ' ';
-            echo html_writer::link(new moodle_url('/blocks/mistralagent/agents.php'),
-                get_string('cancel'), ['class' => 'btn btn-secondary btn-lg']);
+            echo html_writer::link(
+                new moodle_url('/blocks/mistralagent/agents.php'),
+                get_string('cancel'),
+                ['class' => 'btn btn-secondary btn-lg']
+            );
             echo html_writer::end_div();
             echo html_writer::end_tag('form');
             echo '</div></div>';
@@ -257,42 +290,72 @@ if ($action === 'add' || $action === 'edit') {
             . get_string('addagent_manual', 'block_mistralagent') . '</h5>';
     } // End of the action=add fetch section.
 
-    echo html_writer::start_tag('form', [
-        'method' => 'post',
-        'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'save', 'id' => $id]),
-        'class' => 'mform',
-    ]);
+    echo html_writer::start_tag(
+        'form',
+        [
+            'method' => 'post',
+            'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'save', 'id' => $id]),
+            'class' => 'mform',
+        ]
+    );
     echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
 
     echo html_writer::start_div('form-group row');
-    echo html_writer::tag('label', get_string('agentname', 'block_mistralagent'),
-        ['class' => 'col-sm-3 col-form-label', 'for' => 'name']);
+    echo html_writer::tag(
+        'label',
+        get_string('agentname', 'block_mistralagent'),
+        ['class' => 'col-sm-3 col-form-label', 'for' => 'name']
+    );
     echo html_writer::start_div('col-sm-9');
-    echo html_writer::empty_tag('input', [
-        'type' => 'text', 'name' => 'name', 'id' => 'name', 'class' => 'form-control',
-        'value' => $agent ? $agent->name : '', 'required' => true,
-    ]);
+    echo html_writer::empty_tag(
+        'input',
+        [
+            'type' => 'text',
+            'name' => 'name',
+            'id' => 'name',
+            'class' => 'form-control',
+            'value' => $agent ? $agent->name : '',
+            'required' => true,
+        ]
+    );
     echo html_writer::end_div();
     echo html_writer::end_div();
 
     echo html_writer::start_div('form-group row');
-    echo html_writer::tag('label', get_string('agentid', 'block_mistralagent'),
-        ['class' => 'col-sm-3 col-form-label', 'for' => 'agent_id']);
+    echo html_writer::tag(
+        'label',
+        get_string('agentid', 'block_mistralagent'),
+        ['class' => 'col-sm-3 col-form-label', 'for' => 'agent_id']
+    );
     echo html_writer::start_div('col-sm-9');
-    echo html_writer::empty_tag('input', [
-        'type' => 'text', 'name' => 'agent_id', 'id' => 'agent_id', 'class' => 'form-control',
-        'value' => $agent ? $agent->agent_id : '', 'placeholder' => 'ag_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'required' => true,
-    ]);
+    echo html_writer::empty_tag(
+        'input',
+        [
+            'type' => 'text',
+            'name' => 'agent_id',
+            'id' => 'agent_id',
+            'class' => 'form-control',
+            'value' => $agent ? $agent->agent_id : '',
+            'placeholder' => 'ag_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+            'required' => true,
+        ]
+    );
     echo html_writer::tag('small', get_string('agentid_help', 'block_mistralagent'), ['class' => 'form-text text-muted']);
     echo html_writer::end_div();
     echo html_writer::end_div();
 
     echo html_writer::start_div('form-group row');
-    echo html_writer::tag('label', get_string('agentdescription', 'block_mistralagent'),
-        ['class' => 'col-sm-3 col-form-label', 'for' => 'description']);
+    echo html_writer::tag(
+        'label',
+        get_string('agentdescription', 'block_mistralagent'),
+        ['class' => 'col-sm-3 col-form-label', 'for' => 'description']
+    );
     echo html_writer::start_div('col-sm-9');
-    echo html_writer::tag('textarea', $agent ? $agent->description : '',
-        ['name' => 'description', 'id' => 'description', 'class' => 'form-control', 'rows' => 3]);
+    echo html_writer::tag(
+        'textarea',
+        $agent ? $agent->description : '',
+        ['name' => 'description', 'id' => 'description', 'class' => 'form-control', 'rows' => 3]
+    );
     echo html_writer::end_div();
     echo html_writer::end_div();
 
@@ -309,19 +372,25 @@ if ($action === 'add' || $action === 'edit') {
     echo html_writer::start_div('col-sm-9 offset-sm-3');
     echo html_writer::empty_tag('input', ['type' => 'submit', 'value' => get_string('savechanges'), 'class' => 'btn btn-primary']);
     echo ' ';
-    echo html_writer::link(new moodle_url('/blocks/mistralagent/agents.php'),
-        get_string('cancel'), ['class' => 'btn btn-secondary']);
+    echo html_writer::link(
+        new moodle_url('/blocks/mistralagent/agents.php'),
+        get_string('cancel'),
+        ['class' => 'btn btn-secondary']
+    );
     echo html_writer::end_div();
     echo html_writer::end_div();
 
     echo html_writer::end_tag('form');
 } else {
     // Show agents list.
-    echo html_writer::tag('p', html_writer::link(
-        new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'add']),
-        get_string('addagent', 'block_mistralagent'),
-        ['class' => 'btn btn-primary']
-    ));
+    echo html_writer::tag(
+        'p',
+        html_writer::link(
+            new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'add']),
+            get_string('addagent', 'block_mistralagent'),
+            ['class' => 'btn btn-primary']
+        )
+    );
 
     $agents = manager::get_agents(false);
 
@@ -340,15 +409,21 @@ if ($action === 'add' || $action === 'edit') {
 
         foreach ($agents as $agent) {
             $actions = [];
-            $editurl = new moodle_url('/blocks/mistralagent/agents.php',
-                ['action' => 'edit', 'id' => $agent->id]);
+            $editurl = new moodle_url(
+                '/blocks/mistralagent/agents.php',
+                ['action' => 'edit', 'id' => $agent->id]
+            );
             $actions[] = html_writer::link($editurl, $OUTPUT->pix_icon('t/edit', get_string('edit')));
-            $deleteurl = new moodle_url('/blocks/mistralagent/agents.php',
-                ['action' => 'delete', 'id' => $agent->id, 'sesskey' => sesskey()]);
+            $deleteurl = new moodle_url(
+                '/blocks/mistralagent/agents.php',
+                ['action' => 'delete', 'id' => $agent->id, 'sesskey' => sesskey()]
+            );
             $deleteconfirm = get_string('confirmdeleteagent', 'block_mistralagent');
-            $actions[] = html_writer::link($deleteurl,
+            $actions[] = html_writer::link(
+                $deleteurl,
                 $OUTPUT->pix_icon('t/delete', get_string('delete')),
-                ['onclick' => "return confirm('" . $deleteconfirm . "');"]);
+                ['onclick' => "return confirm('" . $deleteconfirm . "');"]
+            );
 
             $table->data[] = [
                 s($agent->name),
