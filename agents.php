@@ -145,7 +145,7 @@ if ($action === 'add' || $action === 'edit') {
 
             echo html_writer::start_tag('form', ['method' => 'post', 'class' => 'form-inline mb-3',
                 'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'add'])]);
-            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey',     'value' => sesskey()]);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
             echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'apikey_input', 'value' => '']);
             echo '<button type="submit" name="fetch_agents" value="1" class="btn btn-primary mr-2">'
                 . '<i class="fa fa-search mr-1"></i>'
@@ -207,14 +207,14 @@ if ($action === 'add' || $action === 'edit') {
             echo html_writer::start_tag('form', ['method' => 'post',
                 'action' => new moodle_url('/blocks/mistralagent/agents.php', ['action' => 'save', 'id' => 0]),
                 'class' => 'mform']);
-            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey',     'value' => sesskey()]);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()]);
             echo html_writer::empty_tag('input',
                 ['type' => 'hidden', 'name' => 'name', 'id' => 'hidden-agent-name', 'value' => '']);
             echo html_writer::empty_tag('input',
                 ['type' => 'hidden', 'name' => 'agent_id', 'id' => 'hidden-agent-id', 'value' => '']);
             echo html_writer::empty_tag('input',
                 ['type' => 'hidden', 'name' => 'description', 'id' => 'hidden-agent-desc', 'value' => '']);
-            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'enabled',     'value' => '1']);
+            echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'enabled', 'value' => '1']);
 
             echo '<div class="row">';
             foreach ($fetchedagents as $ag) {

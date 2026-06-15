@@ -202,7 +202,9 @@ class send_message extends external_api {
 
             if (!empty($conversation->mistral_conversation_id)) {
                 $result = $client->continue_conversation(
-                    $conversation->mistral_conversation_id, $fullmessage, $imagebase64
+                    $conversation->mistral_conversation_id,
+                    $fullmessage,
+                    $imagebase64
                 );
             } else {
                 $result = $client->start_conversation($fullmessage, $imagebase64);
@@ -220,7 +222,8 @@ class send_message extends external_api {
             if (empty($response) && empty($images)) {
                 return self::error_response(
                     get_string('err_api_empty_response', 'block_mistralagent'),
-                    (int)$conversation->id, $quota
+                    (int)$conversation->id,
+                    $quota
                 );
             }
 
@@ -246,7 +249,8 @@ class send_message extends external_api {
             debugging('MistralAgent Error: ' . $e->getMessage(), DEBUG_DEVELOPER);
             return self::error_response(
                 self::friendly_api_error($e->getMessage()),
-                (int)$conversation->id, $quota
+                (int)$conversation->id,
+                $quota
             );
         }
     }

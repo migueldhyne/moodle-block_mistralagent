@@ -130,13 +130,13 @@ class get_conversation extends external_api {
     public static function execute_returns(): external_single_structure {
         return new external_single_structure([
             'success'        => new external_value(PARAM_BOOL, 'Success status'),
-            'conversationid' => new external_value(PARAM_INT,  'Conversation ID'),
+            'conversationid' => new external_value(PARAM_INT, 'Conversation ID'),
             'messages'       => new external_multiple_structure(
                 new external_single_structure([
-                    'id'          => new external_value(PARAM_INT,   'Message ID'),
-                    'role'        => new external_value(PARAM_ALPHA,  'Role: user or assistant'),
-                    'content'     => new external_value(PARAM_RAW,   'Message content'),
-                    'timecreated' => new external_value(PARAM_INT,   'Timestamp'),
+                    'id'          => new external_value(PARAM_INT, 'Message ID'),
+                    'role'        => new external_value(PARAM_ALPHA, 'Role: user or assistant'),
+                    'content'     => new external_value(PARAM_RAW, 'Message content'),
+                    'timecreated' => new external_value(PARAM_INT, 'Timestamp'),
                 ])
             ),
         ]);
