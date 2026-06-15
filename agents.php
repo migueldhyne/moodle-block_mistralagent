@@ -46,7 +46,6 @@ $fetchedagents = [];
 if ($action === 'add'
         && optional_param('fetch_agents', false, PARAM_BOOL)
         && confirm_sesskey()) {
-
     // PARAM_RAW is required: Mistral API keys contain mixed alphanumeric characters and
     // special chars that would be stripped by PARAM_ALPHANUM or PARAM_TEXT.
     // The value is never output to HTML — it is only transmitted to the Mistral API over HTTPS.
@@ -121,7 +120,6 @@ if ($action === 'add' || $action === 'edit') {
 
     // For action=add: API fetch section.
     if ($action === 'add') {
-
         $adminapikey = get_config('block_mistralagent', 'apikey');
         $hasadminkey = !empty($adminapikey);
 

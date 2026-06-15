@@ -34,7 +34,6 @@ $ADMIN->add('blocksettings', new admin_externalpage(
 ));
 
 if ($ADMIN->fulltree) {
-
     // Section separator.
     // API.
     // Section separator.

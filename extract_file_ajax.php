@@ -129,7 +129,7 @@ try {
     }
 
     // Extraction texte.
-    $text = match($ext) {
+    $text = match ($ext) {
         'txt'  => $data,
         'json' => \block_mistralagent\external\extract_file::extract_json_public($data),
         'docx' => \block_mistralagent\external\extract_file::extract_docx_public($data),

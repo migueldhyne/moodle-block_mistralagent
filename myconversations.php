@@ -59,9 +59,9 @@ echo $OUTPUT->heading(get_string('myconversations', 'block_mistralagent'));
 // Get user's conversations for this course.
 $conversations = $DB->get_records_sql(
     "SELECT c.*,
-            (SELECT COUNT(*) FROM {block_mistralagent_msgs} m WHERE m.conversationid = c.id) as messagecount,
+            (SELECT COUNT(*) FROM {block_mistralagent_msgs} m WHERE m.conversationid = c.id) AS messagecount,
             (SELECT content FROM {block_mistralagent_msgs} m
-                WHERE m.conversationid = c.id ORDER BY m.timecreated ASC LIMIT 1) as firstmessage
+                WHERE m.conversationid = c.id ORDER BY m.timecreated ASC LIMIT 1) AS firstmessage
      FROM {block_mistralagent_convs} c
      WHERE c.userid = ? AND c.courseid = ?
      ORDER BY c.timemodified DESC",
@@ -73,13 +73,25 @@ if (empty($conversations)) {
 
     // Button to start new conversation.
     $chaturl = new moodle_url('/blocks/mistralagent/chat.php', ['courseid' => $courseid]);
-    echo html_writer::tag('p', html_writer::link($chaturl,
-        get_string('startnewconversation', 'block_mistralagent'), ['class' => 'btn btn-primary']));
+    echo html_writer::tag(
+        'p',
+        html_writer::link(
+            $chaturl,
+            get_string('startnewconversation', 'block_mistralagent'),
+            ['class' => 'btn btn-primary']
+        )
+    );
 } else {
     // Button to start new conversation.
     $chaturl = new moodle_url('/blocks/mistralagent/chat.php', ['courseid' => $courseid, 'newconv' => 1]);
-    echo html_writer::tag('p', html_writer::link($chaturl,
-        get_string('startnewconversation', 'block_mistralagent'), ['class' => 'btn btn-primary']));
+    echo html_writer::tag(
+        'p',
+        html_writer::link(
+            $chaturl,
+            get_string('startnewconversation', 'block_mistralagent'),
+            ['class' => 'btn btn-primary']
+        )
+    );
 
     echo '<div class="list-group mt-3">';
 
@@ -93,8 +105,14 @@ if (empty($conversations)) {
         $convdate = userdate($conv->timecreated, get_string('strftimedatetime'));
         $title = $conv->title ?: get_string('conversationfrom', 'block_mistralagent', $convdate);
 
-        $continueurl = new moodle_url('/blocks/mistralagent/chat.php', ['courseid' => $courseid, 'convid' => $conv->id]);
-        $deleteurl = new moodle_url($PAGE->url, ['action' => 'delete', 'convid' => $conv->id, 'sesskey' => sesskey()]);
+        $continueurl = new moodle_url(
+            '/blocks/mistralagent/chat.php',
+            ['courseid' => $courseid, 'convid' => $conv->id]
+        );
+        $deleteurl = new moodle_url(
+            $PAGE->url,
+            ['action' => 'delete', 'convid' => $conv->id, 'sesskey' => sesskey()]
+        );
 
         echo '<div class="list-group-item list-group-item-action flex-column align-items-start">';
         echo '<div class="d-flex w-100 justify-content-between">';
@@ -111,12 +129,19 @@ if (empty($conversations)) {
         echo '<small class="text-muted">'
             . get_string('lastactivity', 'block_mistralagent') . ': ' . $lastactivity . '</small>';
         echo '<div>';
-        echo html_writer::link($continueurl, get_string('continue', 'block_mistralagent'),
-            ['class' => 'btn btn-sm btn-primary mr-2']);
-        echo html_writer::link($deleteurl, get_string('delete'), [
-            'class' => 'btn btn-sm btn-outline-danger',
-            'onclick' => "return confirm('" . get_string('confirmdeleteconversation', 'block_mistralagent') . "');",
-        ]);
+        echo html_writer::link(
+            $continueurl,
+            get_string('continue', 'block_mistralagent'),
+            ['class' => 'btn btn-sm btn-primary mr-2']
+        );
+        echo html_writer::link(
+            $deleteurl,
+            get_string('delete'),
+            [
+                'class' => 'btn btn-sm btn-outline-danger',
+                'onclick' => "return confirm('" . get_string('confirmdeleteconversation', 'block_mistralagent') . "');",
+            ]
+        );
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -125,7 +150,10 @@ if (empty($conversations)) {
     echo '</div>';
 }
 
-echo html_writer::link(new moodle_url('/course/view.php', ['id' => $courseid]),
-    get_string('back'), ['class' => 'btn btn-secondary mt-3']);
+echo html_writer::link(
+    new moodle_url('/course/view.php', ['id' => $courseid]),
+    get_string('back'),
+    ['class' => 'btn btn-secondary mt-3']
+);
 
 echo $OUTPUT->footer();

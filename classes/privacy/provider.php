@@ -63,7 +63,6 @@ class provider implements
      * @return collection
      */
     public static function get_metadata(collection $collection): collection {
-
         // Conversations table.
         $collection->add_database_table(
             'block_mistralagent_convs',

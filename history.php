@@ -90,7 +90,8 @@ foreach ($enrolledusers as $user) {
 echo html_writer::start_tag('form', ['method' => 'get', 'class' => 'form-inline mb-3']);
 echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'courseid', 'value' => $courseid]);
 echo html_writer::empty_tag('input', ['type' => 'hidden', 'name' => 'blockinstanceid', 'value' => $blockinstanceid]);
-echo html_writer::tag('label',
+echo html_writer::tag(
+    'label',
     get_string('student', 'block_mistralagent') . ' : ',
     ['class' => 'mr-2', 'for' => 'mistralagent-userid-select']
 );

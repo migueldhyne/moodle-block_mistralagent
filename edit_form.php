@@ -66,7 +66,6 @@ class block_mistralagent_edit_form extends block_edit_form {
      * @param MoodleQuickForm $mform
      */
     protected function specific_definition($mform) {
-
         $presets    = self::get_preset_definitions();
         $order      = self::preset_order();
         $maxpreset  = get_config('block_mistralagent', 'max_preset') ?: 'standard';
@@ -156,7 +155,6 @@ class block_mistralagent_edit_form extends block_edit_form {
      * @return string HTML string.
      */
     private function build_summary_table(array $presets, array $allowed): string {
-
         // Colour coding: green = lightest load, red = heaviest.
         $colours = ['light' => '#d4edda', 'standard' => '#fff3cd', 'full' => '#f8d7da'];
 

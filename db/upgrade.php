@@ -96,7 +96,6 @@ function xmldb_block_mistralagent_upgrade($oldversion) {
 
     // V2 : Multi-bloc — remplacement de courseid par blockinstanceid.
     if ($oldversion < 2026042705) {
-
         /*
          * 1. block_mistralagent_course: add blockinstanceid, drop the unique index on courseid, create
          * l'index unique sur blockinstanceid.
