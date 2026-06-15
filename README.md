@@ -177,6 +177,10 @@ When Mistral sends a deprecation notice, simply update the model ID in this sett
 
 ---
 
+
+
+
+
 If the Mistral agent has the `image_generation` connector enabled:
 
 - When the agent decides to generate an image, the plugin automatically downloads it from the Mistral Files API and displays it inline in the chat.
@@ -305,6 +309,54 @@ block_mistralagent/
     ├── services.php             Web service declarations
     └── access.php               Capability definitions
 ```
+
+**Key design decisions:**
+- **v2:** All data isolation uses `blockinstanceid` as primary key, enabling multiple independent blocks per course.
+- **v3:** `block_mistralagent_course` stores `custom_apikey` (encrypted), `custom_agent_id`, `custom_agent_name`, and `use_custom_key`. `manager::get_instance_apikey()` resolves the effective key transparently for all API calls.
+
+---
+
+## Changelog
+
+### 3.1.2 (2026053000)
+- **Authorship** — all file headers now correctly credit Miguël Dhyne <miguel.dhyne@gmail.com> as author and copyright holder.
+- **Automatic PDF OCR** — PDF resources uploaded to the RAG are now systematically routed through the Mistral OCR API. The "Use OCR" checkbox is no longer required (kept readable for legacy resources).
+- **Quieter logs** — verbose resource-processing debug messages are now gated behind a dedicated setting (`debug_resource_processing`), preventing pollution of Moodle's debug output when general developer debugging is on.
+- **Conversation lookup** — `get_conversation` web service now correctly handles teachers' personal agents (no local agent record) by relying on the effective Mistral agent ID.
+- Final pass of camelCase / line-length cleanup missed in 3.1.1.
+
+### 3.1.1 (2026052901)
+- **Full Moodle coding-style compliance** — the entire codebase now passes Moodle's code checker (PHPCS) cleanly: standardised boilerplate and file/class/function docblocks, camelCase variable names (no underscores), `else if` instead of `elseif`, line length under 132 (code) / 180 (lang), no trailing whitespace, alphabetically sorted language strings, and properly punctuated comments. No functional changes.
+- Removed the temporary `test_extract.php` diagnostic file.
+
+### 3.1.0 (2026052900)
+- **Configurable model IDs** — OCR, embeddings and image generation models are now configurable in the admin settings page. No code change needed when Mistral deprecates a model.
+- **File attachments in chat** — students can now attach TXT, JSON, DOCX, PDF and image files (JPG, PNG, GIF, WEBP) to any chat message.
+  - PDF extraction uses Mistral OCR API as primary method; pure-PHP stream parser as fallback. `pdftotext` / `shell_exec` are no longer required.
+  - Image files are analysed by `pixtral-12b-2409 (configurable)` via `/v1/chat/completions`; the description is injected as text into the conversation.
+  - Upload via `multipart/form-data` (`extract_file_ajax.php`) — replaces the previous base64-in-AJAX approach which silently failed on large files.
+  - Active size limit shown dynamically next to the attachment button.
+- **UI/UX overhaul** — modern, theme-aware design (rounded corners, soft shadows, CSS custom properties). Block widget reorganised as a 3-zone toolbar. CSS fully scoped under `#region-main` to prevent interference with Moodle's navbar.
+- **Bug fix** — `use function` declarations added to all namespaced PHP classes to prevent `Call to undefined function namespace\builtin()` errors on servers that disable `shell_exec`.
+
+### 3.0.0 (2026042803)
+- **Teacher personal API key** — teachers can enter their own Mistral API key and select from their own agents, independently of the administrator.
+- **Zero Data Retention** — `Mistral-Retention: none` header added to all Mistral API calls.
+- **Mistral OCR** — checkbox on PDF upload to use Mistral OCR API for scanned or encoded PDFs.
+- **Copyright reminder** — displayed on the document management page.
+- Bug fixes: history page errors (fullname fields, method rename), lang file syntax errors.
+
+### 2.0.0 (2026042723)
+- Multiple block instances per course (`blockinstanceid` isolation).
+- Image generation support via Mistral Files API.
+- Improved chat UI: left/right message bubbles, animated typing indicator.
+- RAG chunk limit configurable globally and per block.
+- New conversation button fixed.
+
+### 1.x
+- Single chatbot per course.
+- RAG with PDF, DOCX, TXT, JSON, URL support.
+- Usage quotas and conversation history.
 
 ---
 

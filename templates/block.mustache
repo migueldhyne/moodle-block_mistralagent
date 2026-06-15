@@ -17,23 +17,39 @@
 {{!
     @template block_mistralagent/block
 
-    Template context (object passed from block_mistralagent::get_content()):
+    Block widget displaying the agent name, a chat button and admin action icons.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * agentname {string} Display name of the Mistral agent.
+    * chatpageurl {string} URL to open the chat page.
+    * myconversationsurl {string} URL to the user's conversation history.
+    * canconfig {boolean} Whether the current user can configure the block.
+    * configureurl {string} URL to the block configuration page (only when canconfig is true).
+    * resourcesurl {string} URL to the resource management page (only when canconfig is true).
+    * historyurl {string} URL to the full conversation history page (only when canconfig is true).
+    * agentdescription {string} Optional description of the agent (may be empty).
 
     Example context (for Mustache debugging):
     {
         "agentname": "Moodle Assistant",
-        "agentdescription": "Ask me anything about this course.",
         "chatpageurl": "/blocks/mistralagent/chat.php?blockinstanceid=1&courseid=2",
         "myconversationsurl": "/blocks/mistralagent/myconversations.php?courseid=2",
         "canconfig": true,
         "configureurl": "/blocks/mistralagent/configure.php?blockinstanceid=1&courseid=2",
         "resourcesurl": "/blocks/mistralagent/resources.php?blockinstanceid=1&courseid=2",
-        "historyurl": "/blocks/mistralagent/history.php?courseid=2&blockinstanceid=1"
+        "historyurl": "/blocks/mistralagent/history.php?courseid=2&blockinstanceid=1",
+        "agentdescription": "Ask me anything about this course."
     }
 }}
 <div class="block-mistralagent-container">
 
-    {{! Ligne 1 : avatar + nom de l'agent }}
+    {{! Row 1: agent avatar and name }}
     <div class="ma-agent-header">
         <div class="agent-avatar">
             <i class="fa fa-robot" aria-hidden="true"></i>

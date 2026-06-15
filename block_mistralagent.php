@@ -40,8 +40,8 @@ class block_mistralagent extends block_base {
     /**
      * Resolve the effective preset limits for a block instance.
      *
-     * @param stdClass $instanceconfig
-     * @return array
+     * @param  stdClass|null $instanceconfig  Block instance configuration object, or null if unconfigured.
+     * @return array                          Associative array of preset limit values.
      */
     public static function resolve_preset(?stdClass $instanceconfig): array {
         $presets   = self::get_preset_definitions();

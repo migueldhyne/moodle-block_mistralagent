@@ -131,10 +131,10 @@ class resource_manager {
     }
 
     /**
-     * Get all resources for a course.
+     * Get all resources for a given block instance.
      *
-     * @param int $courseid
-     * @return array
+     * @param  int   $blockinstanceid  Block instance ID.
+     * @return array                   Array of resource records ordered by creation date descending.
      */
     public static function get_instance_resources(int $blockinstanceid): array {
         global $DB;
@@ -1191,10 +1191,10 @@ class resource_manager {
     /**
      * Search for relevant chunks using embeddings or keyword fallback.
      *
-     * @param int $courseid
-     * @param string $query
-     * @param int $topk
-     * @return array
+     * @param  int    $blockinstanceid  Block instance ID used to scope resources.
+     * @param  string $query            User query to match against indexed chunks.
+     * @param  int    $topk             Maximum number of chunks to return (default: TOP_K_CHUNKS).
+     * @return array                    Array of matching chunk records, most relevant first.
      */
     public static function search_relevant_chunks(int $blockinstanceid, string $query, int $topk = self::TOP_K_CHUNKS): array {
         global $DB;
