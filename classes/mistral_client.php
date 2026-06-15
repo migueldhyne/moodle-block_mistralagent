@@ -63,7 +63,6 @@ use function json_encode;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mistral_client {
-
     /** @var string Base URL for the beta Conversations API */
     private const CONVERSATIONS_URL = 'https://api.mistral.ai/v1/conversations';
 

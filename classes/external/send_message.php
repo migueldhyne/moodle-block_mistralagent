@@ -33,7 +33,6 @@ use block_mistralagent\resource_manager;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class send_message extends external_api {
-
     /**
      * Define the parameters for the execute method.
      *

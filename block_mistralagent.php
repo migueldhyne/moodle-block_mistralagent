@@ -23,7 +23,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_mistralagent extends block_base {
-
     /**
      * Return the preset definitions (history, file, chunk and message limits).
      *
@@ -31,7 +30,7 @@ class block_mistralagent extends block_base {
      */
     public static function get_preset_definitions(): array {
         return [
-            'light'    => ['history_chars' => 10000, 'filecontent_chars' => 50000,  'rag_chunks' => 3, 'history_messages' => 10],
+            'light'    => ['history_chars' => 10000, 'filecontent_chars' => 50000, 'rag_chunks' => 3, 'history_messages' => 10],
             'standard' => ['history_chars' => 30000, 'filecontent_chars' => 200000, 'rag_chunks' => 5, 'history_messages' => 20],
             'full'     => ['history_chars' => 60000, 'filecontent_chars' => 400000, 'rag_chunks' => 8, 'history_messages' => 40],
         ];
@@ -126,7 +125,8 @@ class block_mistralagent extends block_base {
                 );
             } else {
                 $this->content->text = $OUTPUT->notification(
-                    get_string('noagentavailable', 'block_mistralagent'), 'info'
+                    get_string('noagentavailable', 'block_mistralagent'),
+                    'info'
                 );
             }
             return $this->content;
@@ -154,14 +154,14 @@ class block_mistralagent extends block_base {
             'blockinstanceid'   => $blockinstanceid,
             'courseid'          => $COURSE->id,
             'userid'            => $USER->id,
-            'chatpageurl'       => (new moodle_url('/blocks/mistralagent/chat.php',        $params))->out(false),
+            'chatpageurl'       => (new moodle_url('/blocks/mistralagent/chat.php', $params))->out(false),
             'agentname'         => $agent ? $agent->name : get_string('pluginname', 'block_mistralagent'),
             'agentdescription'  => $agent ? $agent->description : '',
             'myconversationsurl' => (new moodle_url('/blocks/mistralagent/myconversations.php', $params))->out(false),
             'canconfig'         => $canconfig,
-            'configureurl'      => (new moodle_url('/blocks/mistralagent/configure.php',   $params))->out(false),
-            'resourcesurl'      => (new moodle_url('/blocks/mistralagent/resources.php',   $params))->out(false),
-            'historyurl'        => (new moodle_url('/blocks/mistralagent/history.php',     $params))->out(false),
+            'configureurl'      => (new moodle_url('/blocks/mistralagent/configure.php', $params))->out(false),
+            'resourcesurl'      => (new moodle_url('/blocks/mistralagent/resources.php', $params))->out(false),
+            'historyurl'        => (new moodle_url('/blocks/mistralagent/history.php', $params))->out(false),
             'presetlabel'       => $presetlabel,
         ];
 

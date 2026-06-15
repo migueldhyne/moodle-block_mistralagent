@@ -26,7 +26,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_mistralagent_edit_form extends block_edit_form {
-
     /**
      * Preset definitions: values applied for each preset level.
      * Must stay in sync with send_message.php::PRESETS.

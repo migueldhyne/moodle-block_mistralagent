@@ -40,7 +40,6 @@ use block_mistralagent\manager;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_quota_status extends external_api {
-
     /**
      * Define the parameters for the execute method.
      *

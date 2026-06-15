@@ -43,7 +43,6 @@ namespace block_mistralagent;
  *   - history_messages   Maximum number of past messages kept.
  */
 class preset_manager {
-
     /**
      * Return the fixed definition table for all presets.
      *

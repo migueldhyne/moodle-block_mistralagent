@@ -101,7 +101,6 @@ use core_external\external_value;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class extract_file extends external_api {
-
     /**
      * Hard cap on the plain-text returned by this function.
      * send_message.php applies a second, per-course cap based on the preset.

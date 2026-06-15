@@ -28,7 +28,6 @@ namespace block_mistralagent;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manager {
-
     /**
      * Get the agent ID configured for a block instance.
      *
